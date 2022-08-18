@@ -23,7 +23,7 @@ set(raylib_CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${raylib_INSTALL_DIR})
 set(raylib_VERSION "4.2.0")
 
 # Check raylib install
-find_package(raylib ${raylib_VERSION})
+find_package(raylib ${raylib_VERSION} QUIET)
 
 # Install raylib from upstream
 if (NOT raylib_FOUND)
