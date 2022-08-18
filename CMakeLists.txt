@@ -4,7 +4,8 @@ cmake_minimum_required(VERSION 3.21 FATAL_ERROR)
 project(raylib-games
 	VERSION 0.2
 	DESCRIPTION "A set of simple games using the raylib game framework"
-	LANGUAGES C CXX)
+	LANGUAGES C CXX
+)
 
 # enforce C standard and disallow non-portable compiler extensions
 set(CMAKE_C_STANDARD 17)
@@ -16,12 +17,33 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS ON)
 
-find_package(raylib 4.2.0 REQUIRED)
+set(raylib_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/raylib")
+set(raylib_INSTALL_DIR "${CMAKE_CURRENT_BINARY_DIR}/raylib")
+set(raylib_CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${raylib_INSTALL_DIR})
+set(raylib_VERSION "4.2.0")
+
+# Check raylib install
+find_package(raylib ${raylib_VERSION})
+
+# Install raylib from upstream
+if (NOT raylib_FOUND)
+	find_package(Git REQUIRED)
+	include(ExternalProject)
+	ExternalProject_Add(raylib
+		PREFIX ${raylib_PREFIX}
+		GIT_REPOSITORY	https://github.com/raysan5/raylib.git
+		GIT_TAG			${raylib_VERSION}
+		INSTALL_DIR 	${raylib_INSTALL_DIR}
+		CMAKE_ARGS 		${raylib_CMAKE_ARGS}
+		STEP_TARGETS	build
+	)
+endif()
 
 # TODO: make this step platform-dependent
 include_directories(
 	"/usr/include"
-	"/usr/local/include")
+	"/usr/local/include"
+	"${raylib_INSTALL_DIR}/include")
 
 # TODO: make this step platform-dependent
 link_directories(
