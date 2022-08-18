@@ -1,15 +1,22 @@
-cmake_minimum_required(VERSION 3.10...3.19)
+cmake_minimum_required(VERSION 3.21 FATAL_ERROR)
 
 # NOTE: Bump VERSION as needed
 project(raylib-games
-		VERSION 0.1
-		DESCRIPTION "A set of simple games using the raylib game framework"
-        LANGUAGES C)
+	VERSION 0.2
+	DESCRIPTION "A set of simple games using the raylib game framework"
+	LANGUAGES C CXX)
 
 # enforce C standard and disallow non-portable compiler extensions
-set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD 17)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS ON)
+
+# enforce C++ standard and disallow non-portable compiler extensions
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS ON)
+
+find_package(raylib 4.2.0 REQUIRED)
 
 # TODO: make this step platform-dependent
 include_directories(
@@ -18,7 +25,7 @@ include_directories(
 
 # TODO: make this step platform-dependent
 link_directories(
-    "/usr/lib"
+	"/usr/lib"
 	"/usr/lib64"
 	"/usr/local/lib")
 
