@@ -17,6 +17,10 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS ON)
 
+# set pthreads correctly
+find_package(Threads REQUIRED)
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+
 # Local third-party install paths
 set(raylib_INSTALL_DIR "${CMAKE_CURRENT_BINARY_DIR}/raylib")
 set(glog_INSTALL_DIR "${CMAKE_CURRENT_BINARY_DIR}/glog")
@@ -46,7 +50,7 @@ set(EXECUTABLE_OUTPUT_PATH "${CMAKE_BINARY_DIR}/apps")
 set(LIBRARY_OUTPUT_PATH "${CMAKE_BINARY_DIR}/lib")
 
 # TODO: make flags platform dependent
-add_compile_options("-Wall -Wextra -Werror")
+# add_compile_options(-Wall -Wextra -Wpedantic -Werror)
 
 # add source code subdirs
 add_subdirectory("src")

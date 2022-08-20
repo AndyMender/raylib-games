@@ -4,7 +4,9 @@
 set(APP_NAME "wallbreaker")
 
 # specify main target
-add_executable("${APP_NAME}" main.cpp)
+add_executable("${APP_NAME}"
+    main.cpp
+)
 
 # make sure all libraries are properly linked
 get_target_property(_LINK_LIBRARIES "${APP_NAME}" LINK_LIBRARIES)

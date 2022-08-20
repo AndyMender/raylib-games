@@ -7,7 +7,7 @@
 int main(const int /* argc */, char const *argv[])
 {
     // glog setup
-   google::InitGoogleLogging(argv[0]); 
+    google::InitGoogleLogging(argv[0]); 
 
     // Create window (and OpenGL context in the background)
     InitWindow(Main::screenWidth, Main::screenHeight, "raylib [core] example - 3d camera mode");

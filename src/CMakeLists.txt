@@ -2,14 +2,13 @@
 link_libraries(
     m
     GL
-    pthread
     dl
     rt
     X11
-    # glog::glog
+    openal
     raylib
+    glog::glog
 )
-# link_libraries(-lm -lGL -lpthread -ldl -lrt -lX11)
 
 # add directories for specific targets
 add_subdirectory("wallbreaker")
