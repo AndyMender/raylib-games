@@ -10,6 +10,7 @@ Instructions for individual cmake targets will be added later.
 - cmake `>3.21`
 - [glog](https://github.com/google/glog) `=0.6.0`
 - [raylib](https://github.com/raysan5/raylib) `=4.2.0`
+- [sqlite3](https://github.com/sqlite/sqlite) `=3.31.1`
 
 - `raylib` SO file available in `/usr/lib`, `/usr/lib64` or `/usr/local/lib`
 - `raylib` headers available in `/usr/include` or `/usr/local/include`

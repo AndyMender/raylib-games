@@ -21,17 +21,10 @@ set(CMAKE_CXX_EXTENSIONS ON)
 find_package(Threads REQUIRED)
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 
-# Local third-party install paths
-set(raylib_INSTALL_DIR "${CMAKE_CURRENT_BINARY_DIR}/raylib")
-set(glog_INSTALL_DIR "${CMAKE_CURRENT_BINARY_DIR}/glog")
-
-# Check raylib install
-set(raylib_VERSION "4.2.0")
-find_package(raylib ${raylib_VERSION} REQUIRED)
-
-# Check glog install
-set(glog_VERSION "0.6.0")
-find_package(glog ${glog_VERSION} REQUIRED)
+# Third-party packages 
+find_package(raylib 4.2.0 REQUIRED)
+find_package(glog 0.6.0 REQUIRED)
+find_package(SQLite3 3.31.1 REQUIRED)
 
 # TODO: make this step platform-dependent
 include_directories(
