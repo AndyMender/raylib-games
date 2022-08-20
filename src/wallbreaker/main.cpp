@@ -4,7 +4,7 @@
 
 #include <raylib.h>
 
-#include "main.h"
+#include "main.hpp"
 
 // TODO: move global state init to main.h to an 'init' function?
 const int screenWidth = 800;
