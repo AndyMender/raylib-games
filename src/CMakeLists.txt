@@ -6,6 +6,7 @@ link_libraries(
     dl
     rt
     X11
+    # glog::glog
     raylib
 )
 # link_libraries(-lm -lGL -lpthread -ldl -lrt -lX11)
