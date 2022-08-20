@@ -45,6 +45,9 @@ link_directories(
 set(EXECUTABLE_OUTPUT_PATH "${CMAKE_BINARY_DIR}/apps")
 set(LIBRARY_OUTPUT_PATH "${CMAKE_BINARY_DIR}/lib")
 
+# TODO: make flags platform dependent
+add_compile_options("-Wall -Wextra -Werror")
+
 # add source code subdirs
 add_subdirectory("src")
 
