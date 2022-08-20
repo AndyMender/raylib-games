@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
-#include "../common.h"
+#include "../common.hpp"
 
 /* Set verbosity limits */
 enum AppLogLevel VERBOSITY = APP_LOG_ERROR;
