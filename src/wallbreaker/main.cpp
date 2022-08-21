@@ -19,13 +19,14 @@ int main(const int /* argc */, char const *argv[])
 
     // Define basic 3D camera
     Camera3D camera;
-    camera.position = { -2.0f, 2.0f, -2.0f };       // Camera position
-    // camera.position = originPos;                     // Camera position
-    camera.target = { 0.0f, 0.0f, 0.0f };           // Camera looking - forward parallel to plane
-    camera.up = { 0.0f, 1.0f, 0.0f };               // Camera up vector (rotation towards target)
+    camera.position = (
+        Geometry::Vector3D(originPos) + Geometry::Vector3D(0.0f, 2.0f, 0.0f)
+    ).data();                                           // Camera position
+    camera.target = { 0.0f, 0.0f, -25.0f };             // Camera looking - forward parallel to plane
+    camera.up = { 0.0f, 1.0f, 0.0f };                   // Camera up vector (rotation towards target)
 
-    camera.fovy = 45.0f;                            // Camera field-of-view Y
-    camera.projection = CAMERA_PERSPECTIVE;         // Camera mode type
+    camera.fovy = 45.0f;                                // Camera field-of-view Y
+    camera.projection = CAMERA_PERSPECTIVE;             // Camera mode type
 
     // Set cam for FPP movement
     SetCameraMode(camera, CAMERA_FIRST_PERSON);
@@ -58,7 +59,7 @@ int main(const int /* argc */, char const *argv[])
 
         // Add coord center guides
         DrawCubeWires(originPos, 0.5f, 0.5f, 0.5f, BLUE);
-        DrawCubeWires(originPos, 1.0f, 1.0f, 1.0f, BLUE);
+        DrawCubeWires(originPos, 0.75f, 0.75f, 0.75f, BLUE);
 
         // TODO: Remove X, Y, Z guides later
         // X-axis
