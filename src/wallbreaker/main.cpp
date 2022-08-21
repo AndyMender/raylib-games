@@ -62,20 +62,23 @@ int main(const int /* argc */, char const *argv[])
 
         // TODO: Remove X, Y, Z guides later
         // X-axis
+        Vector3 x_shift = (Geometry::Vector3D(originPos) + Geometry::Vector3D(1.0f, 0.0f, 0.0f)).data();
         DrawCubeWires(
-            (Geometry::Vector3D(originPos) + Geometry::Vector3D(1.0f, 0.0f, 0.0f)).data(),
+            x_shift,
             0.5f, 0.5f, 0.5f,
             RED
         );
         // Y-axis
+        Vector3 y_shift = (Geometry::Vector3D(originPos) + Geometry::Vector3D(0.0f, 1.0f, 0.0f)).data();
         DrawCubeWires(
-            (Geometry::Vector3D(originPos) + Geometry::Vector3D(0.0f, 1.0f, 0.0f)).data(),
+            y_shift,
             0.5f, 0.5f, 0.5f,
             LIME
         );
-        // Y-axis
+        // Z-axis
+        Vector3 z_shift = (Geometry::Vector3D(originPos) + Geometry::Vector3D(0.0f, 0.0f, 1.0f)).data();
         DrawCubeWires(
-            (Geometry::Vector3D(originPos) + Geometry::Vector3D(0.0f, 0.0f, 1.0f)).data(),
+            z_shift,
             0.5f, 0.5f, 0.5f,
             SKYBLUE
         );
