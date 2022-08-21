@@ -1,6 +1,10 @@
 
 #include <stdio.h>
 
+#include <glog/logging.h>
+// #include <raylib.h>
+
+#include "geometry.hpp"
 #include "main.hpp"
 
 int main(const int /* argc */, char const *argv[])
@@ -9,27 +13,30 @@ int main(const int /* argc */, char const *argv[])
     google::InitGoogleLogging(argv[0]); 
 
     // Create window (and OpenGL context in the background)
-    InitWindow(Main::screenWidth, Main::screenHeight, "raylib [core] example - 3d camera mode");
+    InitWindow(Main::screenWidth, Main::screenHeight, "Wallbreaker - a 3D Breakout clone!");
 
-    // Define the camera to look into our 3d world
+    Vector3 originPos = { 0.0f, 0.0f, 0.0f };       // Use as reference point to position other objects
+
+    // Define basic 3D camera
     Camera3D camera;
-    // Vector3 coordinates
-    camera.position = { 4.0f, 2.0f, 4.0f };         // Camera position
-    camera.target = { 0.0f, 1.8f, 0.0f };           // Camera looking  forward parallel to plane
+    camera.position = { -2.0f, 2.0f, -2.0f };       // Camera position
+    // camera.position = originPos;                     // Camera position
+    camera.target = { 0.0f, 0.0f, 0.0f };           // Camera looking - forward parallel to plane
     camera.up = { 0.0f, 1.0f, 0.0f };               // Camera up vector (rotation towards target)
 
     camera.fovy = 45.0f;                            // Camera field-of-view Y
     camera.projection = CAMERA_PERSPECTIVE;         // Camera mode type
 
-    Vector3 cubePosition = { 0.0f, 0.0f, 0.0f };
+    // Set cam for FPP movement
+    SetCameraMode(camera, CAMERA_FIRST_PERSON);
 
-    SetCameraMode(camera, CAMERA_FIRST_PERSON); // Set a first person camera mode
-
-    SetTargetFPS(30);               // Set our game to run at 30 frames-per-second
+    // Set FPS (30 or 60)
+    SetTargetFPS(30);
     //--------------------------------------------------------------------------------------
 
     // Main game loop
-    while (!WindowShouldClose())    // Detect window close button or ESC key
+    // NOTE: Detect window close button or ESC key
+    while (!WindowShouldClose())
     {
         // Update
         //----------------------------------------------------------------------------------
@@ -46,21 +53,49 @@ int main(const int /* argc */, char const *argv[])
 
         BeginMode3D(camera);
 
-        DrawPlane({ 0.0f, 0.0f, 0.0f }, { 32.0f, 32.0f }, LIGHTGRAY);       // Draw ground
-        DrawCube({ 16.0f, 2.5f, 0.0f }, 1.0f, 5.0f, 32.0f, LIME);           // Draw a green wall
-        DrawCube({ -16.0f, 2.5f, 0.0f }, 1.0f, 5.0f, 32.0f, BLUE);          // Draw a blue wall
-        DrawCube({ 0.0f, 2.5f, 16.0f }, 32.0f, 5.0f, 1.0f, GOLD);           // Draw a yellow wall
-        DrawCube({ 0.0f, 2.5f, -16.0f }, 32.0f, 5.0f, 1.0f, MAROON );
+        // Draw ground and ceiling
+        DrawPlane(originPos, { 12.0f, 20.0f }, LIGHTGRAY);
+
+        // Add coord center guides
+        DrawCubeWires(originPos, 0.5f, 0.5f, 0.5f, BLUE);
+        DrawCubeWires(originPos, 1.0f, 1.0f, 1.0f, BLUE);
+
+        // TODO: Remove X, Y, Z guides later
+        // X-axis
+        DrawCubeWires(
+            (Geometry::Vector3D(originPos) + Geometry::Vector3D(1.0f, 0.0f, 0.0f)).data(),
+            0.5f, 0.5f, 0.5f,
+            RED
+        );
+        // Y-axis
+        DrawCubeWires(
+            (Geometry::Vector3D(originPos) + Geometry::Vector3D(0.0f, 1.0f, 0.0f)).data(),
+            0.5f, 0.5f, 0.5f,
+            LIME
+        );
+        // Y-axis
+        DrawCubeWires(
+            (Geometry::Vector3D(originPos) + Geometry::Vector3D(0.0f, 0.0f, 1.0f)).data(),
+            0.5f, 0.5f, 0.5f,
+            SKYBLUE
+        );
+
+        // Draw walls
+        DrawCube({ 6.5f, 2.5f, 0.0f }, 1.0f, 5.0f, 20.0f, LIME);
+        DrawCube({ -6.5f, 2.5f, 0.0f }, 1.0f, 5.0f, 20.0f, BLUE);
+        DrawCube({ 0.0f, 2.5f, 10.5f }, 12.0f, 5.0f, 1.0f, GOLD);
+        DrawCube({ 0.0f, 2.5f, -10.5f }, 12.0f, 5.0f, 1.0f, MAROON );
 
         EndMode3D();
 
+        // Stats board
         DrawRectangle( 10, 10, 220, 70, Fade(SKYBLUE, 0.5f));
         DrawRectangleLines( 10, 10, 220, 70, BLUE);
 
+        // Stats board content
         DrawText("First person camera default controls:", 20, 20, 10, BLACK);
         DrawText("- Move with keys: W, A, S, D", 40, 40, 10, DARKGRAY);
         DrawText("- Mouse move to look around", 40, 60, 10, DARKGRAY);
-
         DrawFPS(10, 10);
 
         EndDrawing();
