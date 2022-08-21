@@ -2,9 +2,9 @@
 #include <stdio.h>
 
 #include <glog/logging.h>
-// #include <raylib.h>
+#include <raylib.h>
+#include <raymath.h>
 
-#include "geometry.hpp"
 #include "main.hpp"
 
 int main(const int /* argc */, char const *argv[])
@@ -19,9 +19,7 @@ int main(const int /* argc */, char const *argv[])
 
     // Define basic 3D camera
     Camera3D camera;
-    camera.position = (
-        Geometry::Vector3D(originPos) + Geometry::Vector3D(0.0f, 2.0f, 0.0f)
-    ).data();                                           // Camera position
+    camera.position = Vector3Add(originPos, {0.0f, 2.0f, 0.0f});
     camera.target = { 0.0f, 0.0f, -25.0f };             // Camera looking - forward parallel to plane
     camera.up = { 0.0f, 1.0f, 0.0f };                   // Camera up vector (rotation towards target)
 
@@ -63,23 +61,20 @@ int main(const int /* argc */, char const *argv[])
 
         // TODO: Remove X, Y, Z guides later
         // X-axis
-        Vector3 x_shift = (Geometry::Vector3D(originPos) + Geometry::Vector3D(1.0f, 0.0f, 0.0f)).data();
         DrawCubeWires(
-            x_shift,
+            Vector3Add(originPos, { 1.0f, 0.0f, 0.0f }),
             0.5f, 0.5f, 0.5f,
             RED
         );
         // Y-axis
-        Vector3 y_shift = (Geometry::Vector3D(originPos) + Geometry::Vector3D(0.0f, 1.0f, 0.0f)).data();
         DrawCubeWires(
-            y_shift,
+             Vector3Add(originPos, { 0.0f, 1.0f, 0.0f }),
             0.5f, 0.5f, 0.5f,
             LIME
         );
         // Z-axis
-        Vector3 z_shift = (Geometry::Vector3D(originPos) + Geometry::Vector3D(0.0f, 0.0f, 1.0f)).data();
         DrawCubeWires(
-            z_shift,
+            Vector3Add(originPos, { 0.0f, 0.0f, 1.0f }),
             0.5f, 0.5f, 0.5f,
             SKYBLUE
         );
