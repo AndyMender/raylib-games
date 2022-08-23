@@ -72,35 +72,29 @@ int main(const int /* argc */, char const *argv[])
             SKYBLUE
         );
 
-        // Dimensions of the play field
-        // TODO: Move to 'Main' namespace as constants
-        const float FIELD_WIDTH = 10.0f;
-        const float FIELD_HEIGHT = 5.0f;
-        const float FIELD_DEPTH = 15.0f; 
-
         // Draw ground and ceiling
-        DrawCube(Main::ORIGIN_POS, FIELD_WIDTH, 0.01f, FIELD_DEPTH, LIGHTGRAY);
+        DrawCube(Main::ORIGIN_POS, Main::FIELD_WIDTH, 0.01f, Main::FIELD_DEPTH, LIGHTGRAY);
         DrawCube(
-            Vector3Add(Main::ORIGIN_POS, {0.0f, FIELD_HEIGHT, 0.0f}),
-            FIELD_WIDTH, 0.01f, FIELD_DEPTH,
+            Vector3Add(Main::ORIGIN_POS, {0.0f, Main::FIELD_HEIGHT, 0.0f}),
+            Main::FIELD_WIDTH, 0.01f, Main::FIELD_DEPTH,
             LIGHTGRAY
         );
 
         // Draw walls
         DrawCube(
-            Vector3Add(Main::ORIGIN_POS, { FIELD_WIDTH/2, FIELD_HEIGHT/2, 0.0f }),
-            0.01f, FIELD_HEIGHT, FIELD_DEPTH,
+            Vector3Add(Main::ORIGIN_POS, { Main::FIELD_WIDTH/2, Main::FIELD_HEIGHT/2, 0.0f }),
+            0.01f, Main::FIELD_HEIGHT, Main::FIELD_DEPTH,
             SKYBLUE
         );
         DrawCube(
-            Vector3Add(Main::ORIGIN_POS, { -FIELD_WIDTH/2, FIELD_HEIGHT/2, 0.0f }),
-            0.01f, FIELD_HEIGHT, FIELD_DEPTH,
+            Vector3Add(Main::ORIGIN_POS, { -Main::FIELD_WIDTH/2, Main::FIELD_HEIGHT/2, 0.0f }),
+            0.01f, Main::FIELD_HEIGHT, Main::FIELD_DEPTH,
             SKYBLUE
         );
  
         DrawCube(
-            Vector3Add(Main::ORIGIN_POS, { 0.0f, FIELD_HEIGHT/2, FIELD_DEPTH/2 }),
-            FIELD_WIDTH, FIELD_HEIGHT, 0.01f,
+            Vector3Add(Main::ORIGIN_POS, { 0.0f, Main::FIELD_HEIGHT/2, Main::FIELD_DEPTH/2 }),
+            Main::FIELD_WIDTH, Main::FIELD_HEIGHT, 0.01f,
             DARKBLUE
         );
 
