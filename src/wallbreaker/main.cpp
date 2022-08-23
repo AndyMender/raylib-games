@@ -2,8 +2,6 @@
 #include <stdio.h>
 
 #include <glog/logging.h>
-#include <raylib.h>
-#include <raymath.h>
 
 #include "main.hpp"
 
@@ -13,13 +11,11 @@ int main(const int /* argc */, char const *argv[])
     google::InitGoogleLogging(argv[0]); 
 
     // Create window (and OpenGL context in the background)
-    InitWindow(Main::screenWidth, Main::screenHeight, "Wallbreaker - a 3D Breakout clone!");
-
-    Vector3 originPos = { 0.0f, 0.0f, 0.0f };       // Use as reference point to position other objects
+    InitWindow(Main::SCREEN_WIDTH, Main::SCREEN_HEIGHT, "Wallbreaker - a 3D Breakout clone!");
 
     // Define basic 3D camera
     Camera3D camera;
-    camera.position = Vector3Add(originPos, {0.0f, 2.0f, 0.0f});
+    camera.position = Vector3Add(Main::ORIGIN_POS, {0.0f, 2.0f, -6.0f});
     camera.target = { 0.0f, 0.0f, -25.0f };             // Camera looking - forward parallel to plane
     camera.up = { 0.0f, 1.0f, 0.0f };                   // Camera up vector (rotation towards target)
 
@@ -52,38 +48,61 @@ int main(const int /* argc */, char const *argv[])
 
         BeginMode3D(camera);
 
-        // Draw ground and ceiling
-        DrawPlane(originPos, { 12.0f, 20.0f }, LIGHTGRAY);
-
         // Add coord center guides
-        DrawCubeWires(originPos, 0.5f, 0.5f, 0.5f, BLUE);
-        DrawCubeWires(originPos, 0.75f, 0.75f, 0.75f, BLUE);
+        DrawCubeWires(Main::ORIGIN_POS, 0.5f, 0.5f, 0.5f, BLUE);
+        DrawCubeWires(Main::ORIGIN_POS, 0.75f, 0.75f, 0.75f, BLUE);
 
         // TODO: Remove X, Y, Z guides later
         // X-axis
         DrawCubeWires(
-            Vector3Add(originPos, { 1.0f, 0.0f, 0.0f }),
+            Vector3Add(Main::ORIGIN_POS, { 1.0f, 0.0f, 0.0f }),
             0.5f, 0.5f, 0.5f,
             RED
         );
         // Y-axis
         DrawCubeWires(
-             Vector3Add(originPos, { 0.0f, 1.0f, 0.0f }),
+             Vector3Add(Main::ORIGIN_POS, { 0.0f, 1.0f, 0.0f }),
             0.5f, 0.5f, 0.5f,
             LIME
         );
         // Z-axis
         DrawCubeWires(
-            Vector3Add(originPos, { 0.0f, 0.0f, 1.0f }),
+            Vector3Add(Main::ORIGIN_POS, { 0.0f, 0.0f, 1.0f }),
             0.5f, 0.5f, 0.5f,
             SKYBLUE
         );
 
+        // Dimensions of the play field
+        // TODO: Move to 'Main' namespace as constants
+        const float FIELD_WIDTH = 10.0f;
+        const float FIELD_HEIGHT = 5.0f;
+        const float FIELD_DEPTH = 15.0f; 
+
+        // Draw ground and ceiling
+        DrawCube(Main::ORIGIN_POS, FIELD_WIDTH, 0.01f, FIELD_DEPTH, LIGHTGRAY);
+        DrawCube(
+            Vector3Add(Main::ORIGIN_POS, {0.0f, FIELD_HEIGHT, 0.0f}),
+            FIELD_WIDTH, 0.01f, FIELD_DEPTH,
+            LIGHTGRAY
+        );
+
         // Draw walls
-        DrawCube({ 6.5f, 2.5f, 0.0f }, 1.0f, 5.0f, 20.0f, LIME);
-        DrawCube({ -6.5f, 2.5f, 0.0f }, 1.0f, 5.0f, 20.0f, BLUE);
-        DrawCube({ 0.0f, 2.5f, 10.5f }, 12.0f, 5.0f, 1.0f, GOLD);
-        DrawCube({ 0.0f, 2.5f, -10.5f }, 12.0f, 5.0f, 1.0f, MAROON );
+        DrawCube(
+            Vector3Add(Main::ORIGIN_POS, { FIELD_WIDTH/2, FIELD_HEIGHT/2, 0.0f }),
+            0.01f, FIELD_HEIGHT, FIELD_DEPTH,
+            SKYBLUE
+        );
+        DrawCube(
+            Vector3Add(Main::ORIGIN_POS, { -FIELD_WIDTH/2, FIELD_HEIGHT/2, 0.0f }),
+            0.01f, FIELD_HEIGHT, FIELD_DEPTH,
+            SKYBLUE
+        );
+ 
+        DrawCube(
+            Vector3Add(Main::ORIGIN_POS, { 0.0f, FIELD_HEIGHT/2, FIELD_DEPTH/2 }),
+            FIELD_WIDTH, FIELD_HEIGHT, 0.01f,
+            DARKBLUE
+        );
 
         EndMode3D();
 
