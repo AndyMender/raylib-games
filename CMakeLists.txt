@@ -26,18 +26,6 @@ find_package(raylib 4.2.0 REQUIRED)
 find_package(glog 0.6.0 REQUIRED)
 find_package(SQLite3 3.31.1 REQUIRED)
 
-# TODO: make this step platform-dependent
-include_directories(
-	"/usr/include"
-	"/usr/local/include"
-)
-
-# TODO: make this step platform-dependent
-link_directories(
-	"/usr/lib"
-	"/usr/lib64"
-	"/usr/local/lib")
-
 # make sure targets end up in specific places for easier distribution
 set(EXECUTABLE_OUTPUT_PATH "${CMAKE_BINARY_DIR}/apps")
 set(LIBRARY_OUTPUT_PATH "${CMAKE_BINARY_DIR}/lib")
