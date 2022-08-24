@@ -22,6 +22,8 @@ int main(const int /* argc */, char const *argv[])
     camera.fovy = 45.0f;                                // Camera field-of-view Y
     camera.projection = CAMERA_PERSPECTIVE;             // Camera mode type
 
+    Vector3 ballPos = Vector3Add(Main::ORIGIN_POS, { 0.0f, 2.0f, 0.0f });
+
     // Set cam for FPP movement
     SetCameraMode(camera, CAMERA_FIRST_PERSON);
 
@@ -38,6 +40,15 @@ int main(const int /* argc */, char const *argv[])
         // TODO: Update your variables here
         UpdateCamera(&camera);
 
+        ballPos = Vector3Add(
+            ballPos,
+            {
+                static_cast<float>(GetRandomValue(-1, 1)) / GetRandomValue(20, 200),
+                static_cast<float>(GetRandomValue(-1, 1)) / GetRandomValue(20, 200),
+                static_cast<float>(GetRandomValue(-1, 1)) / GetRandomValue(20, 200),
+            }
+        );
+
         //----------------------------------------------------------------------------------
 
         // Draw
@@ -49,25 +60,25 @@ int main(const int /* argc */, char const *argv[])
         BeginMode3D(camera);
 
         // Add coord center guides
-        DrawCubeWires(Main::ORIGIN_POS, 0.5f, 0.5f, 0.5f, BLUE);
+        DrawCubeWires(Main::ORIGIN_POS, 0.25f, 0.25f, 0.25f, BLUE);
 
         // TODO: Remove X, Y, Z guides later
         // X-axis
         DrawCubeWires(
-            Vector3Add(Main::ORIGIN_POS, { 1.0f, 0.0f, 0.0f }),
-            0.5f, 0.5f, 0.5f,
+            Vector3Add(Main::ORIGIN_POS, { 0.5f, 0.0f, 0.0f }),
+            0.25f, 0.25f, 0.25f,
             RED
         );
         // Y-axis
         DrawCubeWires(
-             Vector3Add(Main::ORIGIN_POS, { 0.0f, 1.0f, 0.0f }),
-            0.5f, 0.5f, 0.5f,
+            Vector3Add(Main::ORIGIN_POS, { 0.0f, 0.5f, 0.0f }),
+            0.25f, 0.25f, 0.25f,
             LIME
         );
         // Z-axis
         DrawCubeWires(
-            Vector3Add(Main::ORIGIN_POS, { 0.0f, 0.0f, 1.0f }),
-            0.5f, 0.5f, 0.5f,
+            Vector3Add(Main::ORIGIN_POS, { 0.0f, 0.0f, 0.5f }),
+            0.25f, 0.25f, 0.25f,
             SKYBLUE
         );
 
@@ -101,6 +112,9 @@ int main(const int /* argc */, char const *argv[])
             Main::FIELD_WIDTH, Main::FIELD_HEIGHT, 0.01f,
             DARKGRAY
         );
+
+        // Draw items
+        DrawSphereWires(ballPos, 0.1f, 8, 8, GOLD);
 
         EndMode3D();
 
