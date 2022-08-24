@@ -50,7 +50,6 @@ int main(const int /* argc */, char const *argv[])
 
         // Add coord center guides
         DrawCubeWires(Main::ORIGIN_POS, 0.5f, 0.5f, 0.5f, BLUE);
-        DrawCubeWires(Main::ORIGIN_POS, 0.75f, 0.75f, 0.75f, BLUE);
 
         // TODO: Remove X, Y, Z guides later
         // X-axis
@@ -97,18 +96,23 @@ int main(const int /* argc */, char const *argv[])
             Main::FIELD_WIDTH, Main::FIELD_HEIGHT, 0.01f,
             DARKBLUE
         );
+        DrawCube(
+            Vector3Add(Main::ORIGIN_POS, { 0.0f, Main::FIELD_HEIGHT/2, -Main::FIELD_DEPTH/2 }),
+            Main::FIELD_WIDTH, Main::FIELD_HEIGHT, 0.01f,
+            DARKGRAY
+        );
 
         EndMode3D();
 
         // Stats board
-        DrawRectangle( 10, 10, 220, 70, Fade(SKYBLUE, 0.5f));
-        DrawRectangleLines( 10, 10, 220, 70, BLUE);
+        DrawRectangle(10, 10, 220, 70, Fade(SKYBLUE, 0.5f));
+        DrawRectangleLines(10, 10, 220, 70, BLUE);
 
         // Stats board content
         DrawText("First person camera default controls:", 20, 20, 10, BLACK);
         DrawText("- Move with keys: W, A, S, D", 40, 40, 10, DARKGRAY);
         DrawText("- Mouse move to look around", 40, 60, 10, DARKGRAY);
-        DrawFPS(10, 10);
+        DrawFPS(Main::SCREEN_WIDTH - 80, Main::SCREEN_HEIGHT - 20);
 
         EndDrawing();
         //----------------------------------------------------------------------------------
