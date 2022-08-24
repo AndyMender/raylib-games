@@ -40,6 +40,12 @@ int main(const int /* argc */, char const *argv[])
         // TODO: Update your variables here
         UpdateCamera(&camera);
 
+        // TODO: Add collision
+        // https://github.com/raysan5/raylib/blob/master/examples/shapes/shapes_collision_area.c
+        // https://developer.mozilla.org/en-US/docs/Games/Techniques/3D_collision_detection
+        // https://gamedev.stackexchange.com/questions/34602/raycasting-collision-detection
+        // https://hal.inria.fr/file/index/docid/319404/filename/grapp08.pdf
+
         ballPos = Vector3Add(
             ballPos,
             {
@@ -114,7 +120,8 @@ int main(const int /* argc */, char const *argv[])
         );
 
         // Draw items
-        DrawSphereWires(ballPos, 0.1f, 8, 8, GOLD);
+        DrawSphere(ballPos, 0.2f, GOLD);
+        // DrawSphereWires(ballPos, 0.2f, 8, 8, DARKGRAY);
 
         EndMode3D();
 
