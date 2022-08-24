@@ -15,7 +15,7 @@ int main(const int /* argc */, char const *argv[])
 
     // Define basic 3D camera
     Camera3D camera;
-    camera.position = Vector3Add(Main::ORIGIN_POS, {0.0f, 2.0f, -6.0f});
+    camera.position = Vector3Add(Main::ORIGIN_POS, { 0.0f, 2.0f, -6.0f });
     camera.target = { 0.0f, 0.0f, -25.0f };             // Camera looking - forward parallel to plane
     camera.up = { 0.0f, 1.0f, 0.0f };                   // Camera up vector (rotation towards target)
 
@@ -74,7 +74,7 @@ int main(const int /* argc */, char const *argv[])
         // Draw ground and ceiling
         DrawCube(Main::ORIGIN_POS, Main::FIELD_WIDTH, 0.01f, Main::FIELD_DEPTH, LIGHTGRAY);
         DrawCube(
-            Vector3Add(Main::ORIGIN_POS, {0.0f, Main::FIELD_HEIGHT, 0.0f}),
+            Vector3Add(Main::ORIGIN_POS, { 0.0f, Main::FIELD_HEIGHT, 0.0f }),
             Main::FIELD_WIDTH, 0.01f, Main::FIELD_DEPTH,
             LIGHTGRAY
         );
