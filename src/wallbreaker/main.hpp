@@ -15,6 +15,10 @@ namespace Main {
     constexpr float FIELD_DEPTH = 15.0f;    // Z
 
     // X, Y, Z
-    constexpr Vector3 ORIGIN_POS = { 0.0f, 0.0f, 0.0f };     // Use as reference point to position other objects
+    constexpr Vector3 ORIGIN_POS = { 0.0f, 0.0f, 0.0f };        // Use as reference point to position other objects
+    
+    // Standard vectors
+    constexpr Vector3 VIEW_TARGET = { 0.0f, 0.0f, -25.0f };     // Initial view target for cameras
+    constexpr Vector3 VIEW_ROTATION = { 0.0f, 1.0f, 0.0f };     // Rotation vectors used for calculating angular movement (.f.e of the cameras)
 
  }   // namespace Main

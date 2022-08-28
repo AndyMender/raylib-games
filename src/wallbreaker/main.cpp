@@ -14,18 +14,22 @@ int main(const int /* argc */, char const *argv[])
     InitWindow(Main::SCREEN_WIDTH, Main::SCREEN_HEIGHT, "Wallbreaker - a 3D Breakout clone!");
 
     // Define basic 3D camera
-    Camera3D camera;
-    camera.position = Vector3Add(Main::ORIGIN_POS, { 0.0f, 2.0f, -6.0f });
-    camera.target = { 0.0f, 0.0f, -25.0f };             // Camera looking - forward parallel to plane
-    camera.up = { 0.0f, 1.0f, 0.0f };                   // Camera up vector (rotation towards target)
+    Camera3D playerCam;
+    playerCam.position = Vector3Add(Main::ORIGIN_POS, { 0.0f, 2.0f, -6.0f });
+    playerCam.target = Main::VIEW_TARGET;                                       // Camera looking - forward parallel to plane
+    playerCam.up = Main::VIEW_ROTATION;                                         // Camera up vector (rotation towards target)
 
-    camera.fovy = 45.0f;                                // Camera field-of-view Y
-    camera.projection = CAMERA_PERSPECTIVE;             // Camera mode type
+    playerCam.fovy = 45.0f;                                // Camera field-of-view Y
+    playerCam.projection = CAMERA_PERSPECTIVE;             // Camera mode type
 
-    Vector3 ballPos = Vector3Add(Main::ORIGIN_POS, { 0.0f, 2.0f, 0.0f });
+    // Use a moving cam for ray-casting collision
+    Camera3D ballCam;
+    ballCam.position = Vector3Add(Main::ORIGIN_POS, { 0.0f, 2.0f, 0.0f });
+    ballCam.target = Main::VIEW_TARGET;
+    ballCam.up = Main::VIEW_ROTATION; 
 
     // Set cam for FPP movement
-    SetCameraMode(camera, CAMERA_FIRST_PERSON);
+    SetCameraMode(playerCam, CAMERA_FIRST_PERSON);
 
     // Set FPS (30 or 60)
     SetTargetFPS(30);
@@ -38,16 +42,22 @@ int main(const int /* argc */, char const *argv[])
         // Update
         //----------------------------------------------------------------------------------
         // TODO: Update your variables here
-        UpdateCamera(&camera);
+        UpdateCamera(&playerCam);
+        // UpdateCamera(&ballCam);
 
-        // TODO: Add collision
+        // GetRayCollisionBox();
+        // GetRayColi
+
+        // TODO: Add ray-casting collision
         // https://github.com/raysan5/raylib/blob/master/examples/shapes/shapes_collision_area.c
+        // https://github.com/raysan5/raylib/blob/master/examples/text/text_draw_3d.c
+        // https://github.com/raysan5/raylib/blob/5840cd6e50890fdc8bb964cf4ed86524f1ca1675/examples/models/models_mesh_picking.c
         // https://developer.mozilla.org/en-US/docs/Games/Techniques/3D_collision_detection
         // https://gamedev.stackexchange.com/questions/34602/raycasting-collision-detection
         // https://hal.inria.fr/file/index/docid/319404/filename/grapp08.pdf
 
-        ballPos = Vector3Add(
-            ballPos,
+        ballCam.position = Vector3Add(
+            ballCam.position,
             {
                 static_cast<float>(GetRandomValue(-1, 1)) / GetRandomValue(20, 200),
                 static_cast<float>(GetRandomValue(-1, 1)) / GetRandomValue(20, 200),
@@ -63,7 +73,7 @@ int main(const int /* argc */, char const *argv[])
 
         ClearBackground(RAYWHITE);
 
-        BeginMode3D(camera);
+        BeginMode3D(playerCam);
 
         // Add coord center guides
         DrawCubeWires(Main::ORIGIN_POS, 0.25f, 0.25f, 0.25f, BLUE);
@@ -120,7 +130,7 @@ int main(const int /* argc */, char const *argv[])
         );
 
         // Draw items
-        DrawSphere(ballPos, 0.2f, GOLD);
+        DrawSphere(ballCam.position, 0.2f, GOLD);
         // DrawSphereWires(ballPos, 0.2f, 8, 8, DARKGRAY);
 
         EndMode3D();
