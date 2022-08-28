@@ -27,21 +27,14 @@ namespace Main {
         INVALID_OBJECT_TYPE = 0,
         OBJECT_WALL,                // includes floors
         OBJECT_BLOCK,               // scoring blocks
+        OBJECT_DEAD,                // "enemy" blocks/walls which penalize the player
         NUM_OBJECT_TYPES
     };
 
     // In-game objects with bounding box
-    class GameObject
-    {
-    public:
-        GameObject(ObjectType object_type, BoundingBox init_box):
-            type(object_type),
-            bounding_box(init_box)
-        { };
-
-    private:
+    typedef struct GameObject {
         ObjectType type;
         BoundingBox bounding_box;
-    };
+    } GameObject;
 
 }   // namespace Main
