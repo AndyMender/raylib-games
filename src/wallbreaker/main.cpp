@@ -19,14 +19,16 @@ int main(const int /* argc */, char const *argv[])
     playerCam.target = Main::VIEW_TARGET;                                       // Camera looking - forward parallel to plane
     playerCam.up = Main::VIEW_ROTATION;                                         // Camera up vector (rotation towards target)
 
-    playerCam.fovy = 45.0f;                                // Camera field-of-view Y
-    playerCam.projection = CAMERA_PERSPECTIVE;             // Camera mode type
+    playerCam.fovy = 45.0f;                                                     // Camera field-of-view Y
+    playerCam.projection = CAMERA_PERSPECTIVE;                                  // Camera mode type
 
     // Use a moving cam for ray-casting collision
     Camera3D ballCam;
     ballCam.position = Vector3Add(Main::ORIGIN_POS, { 0.0f, 2.0f, 0.0f });
     ballCam.target = Main::VIEW_TARGET;
     ballCam.up = Main::VIEW_ROTATION; 
+    ballCam.fovy = 45.0f;
+    ballCam.projection = CAMERA_PERSPECTIVE;
 
     // Set cam for FPP movement
     SetCameraMode(playerCam, CAMERA_FIRST_PERSON);
