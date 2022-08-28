@@ -8,8 +8,7 @@
 
 int main(const int /* argc */, char const *argv[])
 {
-    std::vector<>   
-
+    std::vector<Main::GameObject> game_objects;   
 
     // glog setup
     google::InitGoogleLogging(argv[0]); 
@@ -27,6 +26,7 @@ int main(const int /* argc */, char const *argv[])
     playerCam.projection = CAMERA_PERSPECTIVE;                                  // Camera mode type
 
     // Use a moving cam for ray-casting collision
+    // NOTE: We don't need to register the ball as a game object, because it's the player object
     Camera3D ballCam;
     ballCam.position = Vector3Add(Main::ORIGIN_POS, { 0.0f, 2.0f, 0.0f });
     ballCam.target = Main::VIEW_TARGET;
@@ -49,7 +49,6 @@ int main(const int /* argc */, char const *argv[])
         //----------------------------------------------------------------------------------
         // TODO: Update your variables here
         UpdateCamera(&playerCam);
-        // UpdateCamera(&ballCam);
 
         // GetRayCollisionBox();
         // GetRayColi
@@ -83,26 +82,6 @@ int main(const int /* argc */, char const *argv[])
 
         // Add coord center guides
         DrawCubeWires(Main::ORIGIN_POS, 0.25f, 0.25f, 0.25f, BLUE);
-
-        // TODO: Remove X, Y, Z guides later
-        // X-axis
-        DrawCubeWires(
-            Vector3Add(Main::ORIGIN_POS, { 0.5f, 0.0f, 0.0f }),
-            0.25f, 0.25f, 0.25f,
-            RED
-        );
-        // Y-axis
-        DrawCubeWires(
-            Vector3Add(Main::ORIGIN_POS, { 0.0f, 0.5f, 0.0f }),
-            0.25f, 0.25f, 0.25f,
-            LIME
-        );
-        // Z-axis
-        DrawCubeWires(
-            Vector3Add(Main::ORIGIN_POS, { 0.0f, 0.0f, 0.5f }),
-            0.25f, 0.25f, 0.25f,
-            SKYBLUE
-        );
 
         // Draw ground and ceiling
         DrawCube(Main::ORIGIN_POS, Main::FIELD_WIDTH, 0.01f, Main::FIELD_DEPTH, LIGHTGRAY);
