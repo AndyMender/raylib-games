@@ -1,5 +1,6 @@
 
 #include <stdio.h>
+#include <vector>
 
 #include <glog/logging.h>
 
@@ -7,6 +8,9 @@
 
 int main(const int /* argc */, char const *argv[])
 {
+    std::vector<>   
+
+
     // glog setup
     google::InitGoogleLogging(argv[0]); 
 

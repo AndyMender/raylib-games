@@ -21,4 +21,27 @@ namespace Main {
     constexpr Vector3 VIEW_TARGET = { 0.0f, 0.0f, -25.0f };     // Initial view target for cameras
     constexpr Vector3 VIEW_ROTATION = { 0.0f, 1.0f, 0.0f };     // Rotation vectors used for calculating angular movement (.f.e of the cameras)
 
- }   // namespace Main
+    // Enum of in-game object types to determine behavior, f.e. on collision
+    enum class ObjectType
+    {
+        INVALID_OBJECT_TYPE = 0,
+        OBJECT_WALL,                // includes floors
+        OBJECT_BLOCK,               // scoring blocks
+        NUM_OBJECT_TYPES
+    };
+
+    // In-game objects with bounding box
+    class GameObject
+    {
+    public:
+        GameObject(ObjectType object_type, BoundingBox init_box):
+            type(object_type),
+            bounding_box(init_box)
+        { };
+
+    private:
+        ObjectType type;
+        BoundingBox bounding_box;
+    };
+
+}   // namespace Main
