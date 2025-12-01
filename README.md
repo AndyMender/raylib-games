@@ -2,8 +2,13 @@
 A set of simple games in C17/C++17 (enforced by cmake) using the [raylib](https://github.com/raysan5/raylib) game framework.
 
 # Build
-Refer to the `.travis.yml` Travis CI YAML config for build instructions.
-Instructions for individual cmake targets will be added later.
+## CI/CD
+Covered in the `.travis.yml` Travis CI YAML config
+
+## Manual
+```shell
+cmake -S . -B build
+```
 
 # Requirements
 - a C/C++17-compliant compiler
