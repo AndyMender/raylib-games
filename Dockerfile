@@ -36,7 +36,7 @@ RUN git clone --depth 1 --branch ${RAYLIB_VERSION} https://github.com/raysan5/ra
     make install && ldconfig
 
 # Install newer cmake
-RUN apt-get purge --auto-remove cmake
+RUN apt-get purge --auto-remove -y cmake
 RUN wget https://github.com/Kitware/CMake/releases/download/v4.2.0/cmake-4.2.0-linux-x86_64.sh && \
     mkdir -p /opt/cmake && \
     sh cmake-4.2.0-linux-x86_64.sh --skip-license --prefix=/opt/cmake && \
