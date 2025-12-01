@@ -1,0 +1,27 @@
+name: Docker build
+
+on:
+  # TODO: Limit base container rebuilds to "on-demand"?
+  pull_request:
+    branches:
+      - 'main'
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  docker_build:
+    runs-on: ubuntu:24.04
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - name: Build docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          # TODO: Add an extra versioned tag?
+          tags: |
+            ghcr.io/andymender/builder_all:latest
