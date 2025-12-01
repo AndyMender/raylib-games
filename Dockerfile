@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y gcc-12 gcc-13 gcc-14
 
 # Install selected clang versions
 RUN apt-get update && apt-get install -y \
-    llvm clang libc++abi-dev libc++abi1
+    llvm-19 clang-19 libc++abi-19-dev libc++abi1-19
 
 # Build raylib from source
 RUN apt-get update && apt-get install -y \
