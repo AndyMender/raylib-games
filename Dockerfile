@@ -3,16 +3,14 @@ FROM ubuntu:24.04
 ARG RAYLIB_VERSION="4.2.0"
 
 RUN apt-get update && apt-get install -y \
-    software-properties-common \
-    wget \
     cmake \
     git
 
-# Install a selected LLVM toolchain
-RUN wget https://apt.llvm.org/llvm.sh && chmod +x ./llvm.sh && ./llvm.sh all
-
 # Install selected gcc versions
 RUN apt-get update && apt-get install -y gcc-12 gcc-13 gcc-14
+
+# Install selected clang versions
+RUN apt-get update && apt-get install -y llvm-toolchain-17 llvm-toolchain-18 llvm-toolchain-19
 
 # Build raylib from source
 RUN apt-get update && apt-get install -y \
@@ -34,11 +32,3 @@ RUN git clone --depth 1 --branch ${RAYLIB_VERSION} https://github.com/raysan5/ra
     cmake -S . -B build -DBUILD_SHARED_LIBS=ON && \
     cd build && \
     make install && ldconfig
-
-# Install newer cmake
-RUN apt-get purge --auto-remove -y cmake
-RUN wget https://github.com/Kitware/CMake/releases/download/v4.2.0/cmake-4.2.0-linux-x86_64.sh && \
-    mkdir -p /opt/cmake && \
-    sh cmake-4.2.0-linux-x86_64.sh --skip-license --prefix=/opt/cmake && \
-    ln -s /opt/cmake/bin/cmake /usr/local/bin/cmake && \
-    cmake --version
