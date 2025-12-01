@@ -27,6 +27,13 @@ RUN apt-get update && apt-get install -y \
     libwayland-dev \
     libxkbcommon-dev
 
+# TODO: Should raylib be built with the same compiler later used in the project?
+RUN git clone --depth 1 --branch ${RAYLIB_VERSION} https://github.com/raysan5/raylib.git raylib && \
+    cd raylib && \
+    cmake -S . -B build -DBUILD_SHARED_LIBS=ON && \
+    cd build && \
+    make install && ldconfig
+
 # Install newer cmake
 RUN apt-get purge --auto-remove cmake
 RUN wget https://github.com/Kitware/CMake/releases/download/v4.2.0/cmake-4.2.0-linux-x86_64.sh && \
@@ -34,10 +41,3 @@ RUN wget https://github.com/Kitware/CMake/releases/download/v4.2.0/cmake-4.2.0-l
     sh cmake-4.2.0-linux-x86_64.sh --skip-license --prefix=/opt/cmake && \
     ln -s /opt/cmake/bin/cmake /usr/local/bin/cmake && \
     cmake --version
-
-# TODO: Should raylib be built with the same compiler later used in the project?
-RUN git clone --depth 1 --branch ${RAYLIB_VERSION} https://github.com/raysan5/raylib.git raylib && \
-    cd raylib && \
-    cmake -S . -B build -DBUILD_SHARED_LIBS=ON && \
-    cd build && \
-    make install && ldconfig
