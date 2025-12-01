@@ -7,13 +7,6 @@ RUN apt-get update && apt-get install -y \
     wget \
     git
 
-# Install newer cmake
-RUN wget https://github.com/Kitware/CMake/releases/download/v4.2.0/cmake-4.2.0-linux-x86_64.sh && \
-    mkdir -p /opt/cmake && \
-    sh cmake-4.2.0-linux-x86_64.sh --skip-license --prefix=/opt/cmake && \
-    ln -s /opt/cmake/bin/cmake /usr/local/bin/cmake && \
-    cmake --version
-
 # Install a selected LLVM toolchain
 RUN wget https://apt.llvm.org/llvm.sh && chmod +x ./llvm.sh && ./llvm.sh 20 all
 
@@ -33,6 +26,14 @@ RUN apt-get update && apt-get install -y \
     libxinerama-dev \
     libwayland-dev \
     libxkbcommon-dev
+
+# Install newer cmake
+RUN apt-get purge --auto-remove cmake
+RUN wget https://github.com/Kitware/CMake/releases/download/v4.2.0/cmake-4.2.0-linux-x86_64.sh && \
+    mkdir -p /opt/cmake && \
+    sh cmake-4.2.0-linux-x86_64.sh --skip-license --prefix=/opt/cmake && \
+    ln -s /opt/cmake/bin/cmake /usr/local/bin/cmake && \
+    cmake --version
 
 # TODO: Should raylib be built with the same compiler later used in the project?
 RUN git clone --depth 1 --branch ${RAYLIB_VERSION} https://github.com/raysan5/raylib.git raylib && \
