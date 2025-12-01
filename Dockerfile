@@ -5,6 +5,7 @@ ARG RAYLIB_VERSION="4.2.0"
 RUN apt-get update && apt-get install -y \
     software-properties-common \
     wget \
+    cmake \
     git
 
 # Install a selected LLVM toolchain
