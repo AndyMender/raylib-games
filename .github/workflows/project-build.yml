@@ -11,7 +11,9 @@ on:
 
 jobs:
   project_build:
-    runs-on: 'ghcr.io/andymender/raylib_base:latest'
+    runs-on: ubuntu-latest
+    container:
+        image: ghcr.io/andymender/raylib_base:latest
     permissions:
       packages: read
       contents: read
