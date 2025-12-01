@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y \
     git
 
 # Install a selected LLVM toolchain
-RUN wget https://apt.llvm.org/llvm.sh && chmod +x ./llvm.sh && ./llvm.sh 20 all
+RUN wget https://apt.llvm.org/llvm.sh && chmod +x ./llvm.sh && ./llvm.sh all
 
 # Install selected gcc versions
 RUN apt-get update && apt-get install -y gcc-12 gcc-13 gcc-14
