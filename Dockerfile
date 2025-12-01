@@ -8,3 +8,5 @@ RUN apt-get update && apt-get install -y clang-18 clang-19 clang-20
 
 # Install selected gcc versions
 RUN apt-get update && apt-get install -y gcc-12 gcc-13 gcc-14
+
+# Install latest raylib
