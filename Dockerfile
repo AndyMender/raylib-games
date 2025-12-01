@@ -2,9 +2,13 @@ FROM ubuntu:24.04
 
 ARG RAYLIB_VERSION="4.2.0"
 
+# Install basic dependencies
 RUN apt-get update && apt-get install -y \
     cmake \
-    git
+    git \
+    libgoogle-glog-dev \
+    libunwind-dev \
+    libsqlite3-dev
 
 # Install selected gcc versions
 RUN apt-get update && apt-get install -y gcc-12 gcc-13 gcc-14
