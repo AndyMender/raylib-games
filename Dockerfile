@@ -11,7 +11,8 @@ RUN apt-get update && apt-get install -y \
 # Install selected LLVM toolchains
 RUN wget https://apt.llvm.org/llvm.sh && chmod +x ./llvm.sh && ./llvm.sh 
 RUN apt-get update && apt-get install -y \
-    clang-20 libc++-20-dev libc++abi-20-dev
+    clang-20 lldb-20 lld-20 \
+    libc++-20-dev libc++abi-20-dev
 
 # Install selected gcc versions
 RUN apt-get update && apt-get install -y gcc-12 gcc-13 gcc-14
