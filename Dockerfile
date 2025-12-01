@@ -8,13 +8,8 @@ RUN apt-get update && apt-get install -y \
     cmake \
     git
 
-# Install selected LLVM toolchains
-RUN wget https://apt.llvm.org/llvm.sh && chmod +x ./llvm.sh && ./llvm.sh 
-RUN apt-get update && apt-get install -y \
-    clang-20 lldb-20 lld-20 \
-    libclang-common-20-dev libclang-20-dev libclang1-20 \
-    libllvm20 llvm-20 llvm-20-dev llvm-20-runtime \
-    libc++-20-dev libc++abi-20-dev
+# Install a selected LLVM toolchain
+RUN wget https://apt.llvm.org/llvm.sh && chmod +x ./llvm.sh && ./llvm.sh 20
 
 # Install selected gcc versions
 RUN apt-get update && apt-get install -y gcc-12 gcc-13 gcc-14
@@ -33,6 +28,7 @@ RUN apt-get update && apt-get install -y \
     libwayland-dev \
     libxkbcommon-dev
 
+# TODO: Should raylib be built with the same compiler later used in the project?
 RUN git clone --depth 1 --branch ${RAYLIB_VERSION} https://github.com/raysan5/raylib.git raylib && \
     cd raylib && \
     cmake -S . -B build -DBUILD_SHARED_LIBS=ON && \
