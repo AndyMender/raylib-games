@@ -17,6 +17,9 @@ jobs:
     permissions:
       packages: read
       contents: read
+    env:
+      CC: clang-19
+      CXX: clang++-19
     steps:
       # NOTE: Required step!
       - name: Do repository checkout
@@ -25,4 +28,6 @@ jobs:
       - name: Build project
         run: |
             echo "Starting build..."
+            cmake -S . -B build
+
  
