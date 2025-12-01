@@ -8,7 +8,7 @@ on:
   # TODO: Limit base container rebuilds to "on-demand"?
 
 jobs:
-  project_build:
+  on-success:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/andymender/raylib_base:latest
@@ -18,14 +18,13 @@ jobs:
     env:
       CC: clang-20
       CXX: clang++-20
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       # NOTE: Required step!
       - name: Do repository checkout
         uses: actions/checkout@v5
-    
       - name: Build project
         run: |
-            echo "Starting build..."
-            cmake -S . -B build
-
+          echo "Starting build..."
+          cmake -S . -B build
  
