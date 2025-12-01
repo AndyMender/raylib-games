@@ -21,8 +21,8 @@ jobs:
       packages: read
       contents: read
     env:
-      CC: clang-20
-      CXX: clang++-20
+      CC: clang-14
+      CXX: clang++-14
     steps:
       # NOTE: Required step!
       - name: Do repository checkout
