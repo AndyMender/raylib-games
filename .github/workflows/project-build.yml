@@ -2,9 +2,8 @@ name: Project build
 
 on:
   workflow_run:
-    workflows: ["Docker build"]
-    types:
-      - completed
+    workflows: [Docker build]
+    types: [completed]
   # TODO: Limit base container rebuilds to "on-demand"?
 
 jobs:
