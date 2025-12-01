@@ -16,6 +16,7 @@ jobs:
       packages: write
       contents: read
     steps:
+      # NOTE: Required step!
       - uses: actions/checkout@v5
       - name: Build docker image
         uses: docker/build-push-action@v6
@@ -26,3 +27,5 @@ jobs:
           # TODO: Add an extra versioned tag?
           tags: |
             ghcr.io/andymender/builder_all:latest
+          secrets: |
+            GIT_AUTH_TOKEN=${{ secrets.GITHUB_TOKEN }}
