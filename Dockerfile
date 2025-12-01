@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get update && apt-get install -y gcc-12 gcc-13 gcc-14
 
 # Install selected clang versions
-RUN apt-get update && apt-get install -y llvm-toolchain-17 llvm-toolchain-18 llvm-toolchain-19
+RUN apt-get update && apt-get install -y llvm-18 llvm-19 llvm-20
 
 # Build raylib from source
 RUN apt-get update && apt-get install -y \
