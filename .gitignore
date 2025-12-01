@@ -53,3 +53,7 @@ dkms.conf
 
 # Build artifacts
 build/
+CMakeCache.txt
+cmake_install.cmake
+CMakeFiles/
+**/**/Makefile
