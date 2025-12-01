@@ -36,4 +36,4 @@ jobs:
           push: true
           # TODO: Add an extra versioned tag?
           tags: |
-            ghcr.io/andymender/builder_all:latest
+            ghcr.io/andymender/raylib_base:latest
