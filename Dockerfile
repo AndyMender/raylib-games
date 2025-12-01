@@ -11,7 +11,10 @@ RUN apt-get update && apt-get install -y \
     libsqlite3-dev
 
 # Install selected gcc versions
-RUN apt-get update && apt-get install -y gcc-12 gcc-13 gcc-14
+RUN apt-get update && apt-get install -y \
+    gcc-12 g++-12 \
+    gcc-13 g++-13 \
+    gcc-14 g++-14
 
 # Install selected clang versions
 RUN apt-get update && apt-get install -y \
