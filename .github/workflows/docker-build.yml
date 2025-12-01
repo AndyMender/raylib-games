@@ -17,7 +17,17 @@ jobs:
       contents: read
     steps:
       # NOTE: Required step!
-      - uses: actions/checkout@v5
+      - name: Do repository checkout
+        uses: actions/checkout@v5
+
+      # NOTE: Required step!
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ github.token }}
+
       - name: Build docker image
         uses: docker/build-push-action@v6
         with:
@@ -27,5 +37,3 @@ jobs:
           # TODO: Add an extra versioned tag?
           tags: |
             ghcr.io/andymender/builder_all:latest
-          secrets: |
-            GIT_AUTH_TOKEN=${{ github.token }}
