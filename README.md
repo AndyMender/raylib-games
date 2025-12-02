@@ -3,7 +3,7 @@ A set of simple games in C17/C++17 (enforced by cmake) using the [raylib](https:
 
 # Build
 ## CI/CD
-Covered in the `.travis.yml` Travis CI YAML config
+Covered in [github actions workflows](./.github/workflows/).
 
 ## Manual
 ```shell

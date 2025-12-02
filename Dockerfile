@@ -1,0 +1,41 @@
+FROM ubuntu:24.04
+
+ARG RAYLIB_VERSION
+
+# Install basic dependencies
+RUN apt-get update && apt-get install -y \
+    cmake \
+    git \
+    libgoogle-glog-dev \
+    libunwind-dev \
+    libsqlite3-dev
+
+# Install selected gcc versions
+RUN apt-get update && apt-get install -y \
+    gcc-12 g++-12 \
+    gcc-13 g++-13 \
+    gcc-14 g++-14
+
+# Install selected clang versions
+RUN apt-get update && apt-get install -y \
+    llvm-20 clang-20 libc++abi-20-dev libc++abi1-20 libc++1-20
+
+# Build raylib from source
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libasound2-dev \
+    libx11-dev \
+    libxrandr-dev \
+    libxi-dev \
+    libgl1-mesa-dev \
+    libglu1-mesa-dev \
+    libxcursor-dev \
+    libxinerama-dev \
+    libwayland-dev \
+    libxkbcommon-dev
+
+RUN git clone --depth 1 --branch ${RAYLIB_VERSION} https://github.com/raysan5/raylib.git raylib && \
+    cd raylib && \
+    cmake -S . -B build -DBUILD_SHARED_LIBS=ON && \
+    cd build && \
+    make install && ldconfig
