@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install -y \
 
 # Install selected clang versions
 RUN apt-get update && apt-get install -y \
-    llvm-19 clang-19 libc++abi-19-dev libc++abi1-19 libc++1-19 
+    llvm-20 clang-20 libc++abi-20-dev libc++abi1-20 libc++1-20
 
 # Build raylib from source
 RUN apt-get update && apt-get install -y \
