@@ -1,13 +1,17 @@
 name: Docker build
 
 on:
-  # TODO: Limit base container rebuilds to "on-demand"?
   pull_request:
     branches:
       - 'main'
+    paths:
+      - 'Dockerfile'
+
   push:
     branches:
       - 'main'
+    paths:
+      - 'Dockerfile'
 
 jobs:
   docker_build:
