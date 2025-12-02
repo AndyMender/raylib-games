@@ -6,15 +6,17 @@ on:
       - 'main'
     paths:
       - 'Dockerfile'
+      - '.github/workflows/**'
 
   push:
     branches:
       - 'main'
     paths:
       - 'Dockerfile'
+      - '.github/workflows/**'
 
 env:
-  RAYLIB_VERSION: '4.2.0'
+  RAYLIB_VERSION: '5.5'
 
 jobs:
   docker_build:

@@ -22,7 +22,7 @@ find_package(Threads REQUIRED)
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 
 # Third-party packages 
-find_package(raylib 4.2.0 REQUIRED)
+find_package(raylib 5.5.0 REQUIRED)
 find_package(glog 0.6.0 REQUIRED)
 find_package(SQLite3 3.31.1 REQUIRED)
 
