@@ -20,9 +20,13 @@ jobs:
     permissions:
       packages: read
       contents: read
-    env:
-      CC: clang-20
-      CXX: clang++-20
+    strategy:
+      matrix:
+        compilers:
+          - 'CC=clang-20 CXX=clang++-20'
+          - 'CC=gcc-12 CXX=g++-12'
+          - 'CC=gcc-13 CXX=g++-13'
+          - 'CC=gcc-14 CXX=g++-14'
     steps:
       # NOTE: Required step!
       - name: Do repository checkout
@@ -30,5 +34,4 @@ jobs:
       - name: Build project
         run: |
           echo "Starting build..."
-          cmake -S . -B build
- 
+          ${{ matrix.compilers }} cmake -S . -B build
