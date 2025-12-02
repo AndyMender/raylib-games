@@ -16,7 +16,7 @@ on:
       - '.github/workflows/**'
 
 env:
-  RAYLIB_VERSION: '5.5.0'
+  RAYLIB_VERSION: '5.5'
 
 jobs:
   docker_build:
