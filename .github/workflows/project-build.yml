@@ -6,12 +6,14 @@ on:
       - 'main'
     paths:
       - 'src/**'
+      - 'CMakeLists.txt'
 
   push:
     branches:
       - 'main'
     paths:
       - 'src/**'
+      - 'CMakeLists.txt'
 
 jobs:
   project_build:
