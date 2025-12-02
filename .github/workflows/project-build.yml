@@ -4,13 +4,6 @@ on:
   workflow_run:
     workflows: [Docker build]
     types: [completed]
-  # TODO: Limit base container rebuilds to "on-demand"?
-  pull_request:
-    branches:
-      - 'main'
-  push:
-    branches:
-      - 'main'
 
 jobs:
   project_build:
